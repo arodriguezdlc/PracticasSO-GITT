@@ -21,24 +21,42 @@ int main () {
 	key_t 	clave; 
 	int 	shmid;
 	int	  * seg 			= NULL;
+	int error;
 
-	if ((sem_huecos = sem_open("huecos", 0)) == SEM_FAILED)
+	//ABRIMOS SEMAFOROS
+	if ((sem_huecos = sem_open("huecos", 0)) == SEM_FAILED) 
 		printf("Error al abrir semaforo huecos\n");
 	else {
-		printf("Semaforo huecos abierto con exito\n");		
-	}		
-
+		printf("Semaforo huecos abierto con exito\n");
+		error = true;
+	}
 	if ((sem_elementos = sem_open("elementos", 0)) == SEM_FAILED)
 		printf("Error al abrir semaforo elementos\n");
 	else {
-		printf("Semaforo elementos abierto con exito\n");		
+		printf("Semaforo elementos abierto con exito\n");
+		error = true;
 	}
-
 	if ((sem_mutex = sem_open("mutex", 0)) == SEM_FAILED)
 		printf("Error al abrir semaforo mutex\n");
 	else {
 		printf("Semaforo mutex abierto con exito\n");		
+		error = true;
 	}
-	
+	if (error != true) {
+		//ABRIMOS MEMORIA COMPARTIDA
+		clave=ftok(".",'S');
+
+		if((shmid=shmget(clave,(TAM_BUFFER+2) * sizeof(int),0))==-1) 
+         	printf("Error al abrir el segmento\n");
+    	else if((seg=shmat(shmid,NULL,0))== (int *)-1) 
+         	printf("Error al mapear el segmento\n"); 
+    	else {
+    		
+
+    	}
+	}
+
+
+
 
 }
