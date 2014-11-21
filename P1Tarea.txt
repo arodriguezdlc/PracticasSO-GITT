@@ -1,0 +1,279 @@
+PR�CTICA 1. PROCESOS
+
+TAREAS:
+
+1.	Descarga el fichero procesos.zip correspondiente a la primera pr�ctica. 
+      [OK]
+2.	Compila el programa p1_prueba1.c mediante la siguiente instrucci�n:
+
+                   gcc �Wall �W  p1_prueba1.c  -o p1
+
+      [OK]
+3.	Ejecuta varias veces el programa generado.
+      [OK] => Se observa que el PID del proceso padre siempre es el mismo 
+        y que el de el proceso hijo se incrementa de forma secuencial.
+        
+        salas@314CDC33:~/Descargas/procesos$ ./p1
+        Identificador de proceso: 8907
+        Identificador del proceso padre: 8544
+        salas@314CDC33:~/Descargas/procesos$ ./p1
+        Identificador de proceso: 8908
+        Identificador del proceso padre: 8544
+        salas@314CDC33:~/Descargas/procesos$ ./p1
+        Identificador de proceso: 8909
+        Identificador del proceso padre: 8544
+        salas@314CDC33:~/Descargas/procesos$ ./p1
+        Identificador de proceso: 8910
+        Identificador del proceso padre: 8544
+        
+4.	�Qu� proceso es el padre del proceso p1?  Se puede ver con la orden ps
+      Es el proceso bash (l�nea de comandos).
+      
+      salas@314CDC33:~/Descargas/procesos$ ps
+        PID TTY          TIME CMD
+       8544 pts/0    00:00:00 bash
+       8581 pts/0    00:00:00 nano
+       8912 pts/0    00:00:00 ps
+
+
+
+
+5.	Compila y ejecuta p1_prueba2.c. Indica el identificador de usuario real y efectivo del proceso y tambi�n el identificador de grupo real y efectivo.
+
+
+    Identificador de usuario: 1000
+    Identificador de usuario efectivo: 1000
+    Identificador de grupo: 1000
+    Identificador de grupo efectivo: 1000
+
+
+6.	Compila y ejecuta p1_prueba3.c. Indica de las l�neas de salida cu�l corresponde al padre y cu�l corresponde al hijo.
+
+    salas@314CDC33:~/Descargas/procesos$ ./p3
+    Proceso 8922; padre = 8544 
+    Proceso 8923; padre = 8922 
+    
+    La primera l�nea corresponde al padre y la segunda al hijo. De hecho
+    en la l�nea del hijo se indica que el padre es el proceso indicado en 
+    la primera l�nea
+
+
+
+7.	Observa que se ha puesto wait en el padre, esto es para que el proceso padre espere a que el hijo termine antes de terminar. 
+Indica el resultado de la ejecuci�n si comentas el wait.
+
+    salas@314CDC33:~/Descargas/procesos$ ./p31
+    Proceso 9071; padre = 8544 
+    salas@314CDC33:~/Descargas/procesos$ Proceso 9072; padre = 2576 
+
+    El proceso padre termina antes que el hijo, y cuando el hijo pregunta
+    quien es su padre, el sistema operativo no lo sabe, devolviendo un valor
+    incorrecto.
+    
+
+8.	En p1_prueba3.c crea una variable local a main llamada a, in�ciala a 0. Haz varias pruebas imprimiendo el valor de la variable a antes del fork, 
+en el hijo, en el padre y despu�s del switch. Prueba tambi�n a modificar su valor en el hijo y en el padre. 
+
+    salas@314CDC33:~/Descargas/procesos$ ./p32
+    INICIO => a = 0
+    PADRE (antes) => a = 0
+    INICIO => a = 0
+    PADRE (despues) => a = 2
+    HIJO (antes) => a = 0
+    HIJO (despues) => a = 1
+    FINAL => a = 1
+    FINAL => a = 2
+    
+    Se observa que la variable es independiente para ambos procesos, y 
+    la modificaci�n en uno no afecta al otro.
+
+9.	Recuerda como se utilizan los argumentos en la l�nea de �rdenes en C compilando y ejecutando el programa argumentos.c proporcionado.
+
+    salas@314CDC33:~/Descargas/procesos$ gcc -W -Wall argumentos.c -o arg
+    salas@314CDC33:~/Descargas/procesos$ ./arg 
+    argc= 1
+    argv[0]=./arg
+
+10.	Compila y ejecuta p1_prueba4.c. Indica cu�l es el resultado de la ejecuci�n.
+    salas@314CDC33:~/Descargas/procesos$ ./p41
+    Proceso padre
+    salas@314CDC33:~/Descargas/procesos$ total 104
+    -rwxrwxr-x 1 salas salas 7299 oct  7 13:23 arg
+    -rw-rw-r-- 1 salas salas  207 oct  6  2011 argumentos.c
+    -rwxrwxr-x 1 salas salas 7376 oct  7 12:58 p1
+    -rw-rw-r-- 1 salas salas  330 oct  6  2011 p1_prueba1.c
+    -rw-rw-r-- 1 salas salas  350 oct  6  2011 p1_prueba2.c
+    -rw-rw-r-- 1 salas salas  870 oct  7 13:19 p1_prueba3.c
+    -rw-rw-r-- 1 salas salas  869 oct  7 13:19 p1_prueba3.c~
+    -rw-rw-r-- 1 salas salas  476 oct  7 13:34 p1_prueba4.c
+    -rw-rw-r-- 1 salas salas  491 oct  7 13:34 p1_prueba4.c~
+    -rw-rw-r-- 1 salas salas  567 oct  4  2012 p1_prueba5.c
+    -rw-rw-r-- 1 salas salas  470 oct  4  2012 p1_prueba6.c
+    -rw-rw-r-- 1 salas salas  917 oct  4  2012 p1_prueba7.c
+    -rwxrwxr-x 1 salas salas 7453 oct  7 12:48 p2
+    -rwxrwxr-x 1 salas salas 7486 oct  7 13:01 p3
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:16 p31
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:19 p32
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:25 p4
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:36 p41
+
+    El resultado es que el proceso hijo es sustituido por el proceso ls.
+     
+
+
+11.	Quita el comentario en p1_prueba4.c de la instrucci�n getchar para que pida un car�cter antes de terminar. Ejecuta ps �a para ver todos los procesos.
+
+  ps -a
+    PID TTY          TIME CMD
+   8581 pts/0    00:00:00 nano
+   8959 pts/0    00:00:00 p31
+   9278 pts/0    00:00:00 p42
+   9279 pts/0    00:00:00 ls <defunct>
+   9280 pts/5    00:00:00 ps
+
+  p42 es el padre y el proceso hijo ha sido sustituido por el proceso ls
+
+ 
+12.	Cambia en p1_prueba4.c la instrucci�n execlp por esta otra y observa el resultado:
+execlp("ls","ls","-j",NULL);
+Comenta el resultado.
+
+salas@314CDC33:~/Descargas/procesos$ ./p43
+Proceso padre
+ls: opci�n incorrecta -- �j�
+Pruebe �ls --help� para m�s informaci�n.
+
+El resultado es similar al del apartado anterior, pero esta vez se produce
+un error en el proceso ls.
+
+
+13.	Cambia en p1_prueba4.c la instrucci�n execlp por esta otra y observa el resultado:
+execlp("ls","gg","-j",NULL);
+Comenta el resultado.
+
+    salas@314CDC33:~/Descargas/procesos$ ./p44
+    Proceso padre
+    gg: opci�n incorrecta -- �j�
+    Pruebe �gg --help� para m�s informaci�n.
+    
+    Aunque se cambie el nombre del programa, sigue llamandose al mismo
+    archivo para la ejecuci�n por lo que se ejecuta el programa ls. Como
+    el programa no comprueba el nombre de el mismo, se ejecuta sin errores.
+    El error est� provocado por la opci�n -j que es incorrecta en el
+    programa ls.
+    
+    
+
+
+14.	Compila y ejecuta p1_prueba5.c. Indica cu�l es el resultado.
+
+    salas@314CDC33:~/Descargas/procesos$ ./p5
+    Proceso padre
+    salas@314CDC33:~/Descargas/procesos$ total 136
+    -rwxrwxr-x 1 salas salas 7299 oct  7 13:23 arg
+    -rw-rw-r-- 1 salas salas  207 oct  6  2011 argumentos.c
+    -rwxrwxr-x 1 salas salas 7376 oct  7 12:58 p1
+    -rw-rw-r-- 1 salas salas  330 oct  6  2011 p1_prueba1.c
+    -rw-rw-r-- 1 salas salas  350 oct  6  2011 p1_prueba2.c
+    -rw-rw-r-- 1 salas salas  870 oct  7 13:19 p1_prueba3.c
+    -rw-rw-r-- 1 salas salas  869 oct  7 13:19 p1_prueba3.c~
+    -rw-rw-r-- 1 salas salas  473 oct  7 13:50 p1_prueba4.c
+    -rw-rw-r-- 1 salas salas  473 oct  7 13:50 p1_prueba4.c~
+    -rw-rw-r-- 1 salas salas  567 oct  4  2012 p1_prueba5.c
+    -rw-rw-r-- 1 salas salas  470 oct  4  2012 p1_prueba6.c
+    -rw-rw-r-- 1 salas salas  917 oct  4  2012 p1_prueba7.c
+    -rwxrwxr-x 1 salas salas 7453 oct  7 12:48 p2
+    -rwxrwxr-x 1 salas salas 7486 oct  7 13:01 p3
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:16 p31
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:19 p32
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:25 p4
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:36 p41
+    -rwxrwxr-x 1 salas salas 7448 oct  7 13:48 p42
+    -rwxrwxr-x 1 salas salas 7448 oct  7 13:48 p43
+    -rwxrwxr-x 1 salas salas 7448 oct  7 13:50 p44
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:54 p5
+
+
+
+15.	Compila  p1_prueba6.c y ejec�talo para que el resultado sea similar al resultado de p1_prueba5.c.
+
+    salas@314CDC33:~/Descargas/procesos$ p6 ls -l
+    Proceso padre
+    salas@314CDC33:~/Descargas/procesos$ total 144
+    -rwxrwxr-x 1 salas salas 7299 oct  7 13:23 arg
+    -rw-rw-r-- 1 salas salas  207 oct  6  2011 argumentos.c
+    -rwxrwxr-x 1 salas salas 7376 oct  7 12:58 p1
+    -rw-rw-r-- 1 salas salas  330 oct  6  2011 p1_prueba1.c
+    -rw-rw-r-- 1 salas salas  350 oct  6  2011 p1_prueba2.c
+    -rw-rw-r-- 1 salas salas  870 oct  7 13:19 p1_prueba3.c
+    -rw-rw-r-- 1 salas salas  869 oct  7 13:19 p1_prueba3.c~
+    -rw-rw-r-- 1 salas salas  473 oct  7 13:50 p1_prueba4.c
+    -rw-rw-r-- 1 salas salas  473 oct  7 13:50 p1_prueba4.c~
+    -rw-rw-r-- 1 salas salas  567 oct  4  2012 p1_prueba5.c
+    -rw-rw-r-- 1 salas salas  470 oct  4  2012 p1_prueba6.c
+    -rw-rw-r-- 1 salas salas  917 oct  4  2012 p1_prueba7.c
+    -rwxrwxr-x 1 salas salas 7453 oct  7 12:48 p2
+    -rwxrwxr-x 1 salas salas 7486 oct  7 13:01 p3
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:16 p31
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:19 p32
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:25 p4
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:36 p41
+    -rwxrwxr-x 1 salas salas 7448 oct  7 13:48 p42
+    -rwxrwxr-x 1 salas salas 7448 oct  7 13:48 p43
+    -rwxrwxr-x 1 salas salas 7448 oct  7 13:50 p44
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:54 p5
+    -rwxrwxr-x 1 salas salas 7409 oct  7 13:56 p6
+
+16.	 Compila p1_prueba7.c y ejec�talo con los siguientes argumentos:
+p1_prueba1
+sin argumentos
+kk
+ls �j
+Para probar la terminaci�n con una se�al : ls �lR /     
+y a continuaci�n: Crt-z / ps / kill -9 idProcesoHijo / jobs / fg idTrabajoPadre 
+
+salas@314CDC33:~/Descargas/procesos$ ./p7 p1 sin argumentos kk ls -j
+Identificador de proceso: 9414
+Identificador del proceso padre: 9413
+El mandato se ejecuto de forma normal
+
+
+----------------------------------------------------------------------------------
+
+^Z
+[1]+  Detenido                ./p7 ls -lR /
+alberto@ARC-UNI-LINUX:~/Descargas/procesos$ ps
+  PID TTY          TIME CMD
+ 3357 pts/0    00:00:00 bash
+ 3847 pts/0    00:00:00 p7
+ 3848 pts/0    00:00:01 ls
+ 3851 pts/0    00:00:00 ps
+alberto@ARC-UNI-LINUX:~/Descargas/procesos$ kill -9 3848
+alberto@ARC-UNI-LINUX:~/Descargas/procesos$ ps
+  PID TTY          TIME CMD
+ 3357 pts/0    00:00:00 bash
+ 3847 pts/0    00:00:00 p7
+ 3848 pts/0    00:00:01 ls <defunct>
+ 3854 pts/0    00:00:00 ps
+alberto@ARC-UNI-LINUX:~/Descargas/procesos$ jobs
+[1]+  Detenido                ./p7 ls -lR /
+alberto@ARC-UNI-LINUX:~/Descargas/procesos$ fg 1
+./p7 ls -lR /
+El hijo termino al recibir la señal 9
+alberto@ARC-UNI-LINUX:~/Descargas/procesos$ ps
+  PID TTY          TIME CMD
+ 3357 pts/0    00:00:00 bash
+ 3858 pts/0    00:00:00 ps
+
+Se pasa el proceso a segundo plano y se mata el proceso hijo. Sin embargo como 
+el padre no ha terminado, ese proceso sigue en la tabla de procesos. al finalizar
+el proceso padre que estaba en segundo plano, se elimina tb de la tabla al proceso 
+hijo que ya había finalizado.
+
+
+
+
+
+
+
+

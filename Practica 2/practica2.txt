@@ -1,0 +1,30 @@
+1. [OK]
+
+2. [OK]
+  salas@316CDC24:~/Descargas/combasica_signals$ gcc -W -Wall p2_prueba1.c -o p1
+  salas@316CDC24:~/Descargas/combasica_signals$ ./p1
+  ^C^C^C^Z
+  [1]+  Detenido                ./p1
+  salas@316CDC24:~/Descargas/combasica_signals$ ps
+    PID TTY          TIME CMD
+   9491 pts/1    00:00:00 bash
+  11138 pts/1    00:00:06 p1
+  11946 pts/1    00:00:00 ps
+  salas@316CDC24:~/Descargas/combasica_signals$ kill -SIGKILL 11138
+  salas@316CDC24:~/Descargas/combasica_signals$ ps
+    PID TTY          TIME CMD
+   9491 pts/1    00:00:00 bash
+  12754 pts/1    00:00:00 ps
+  [1]+  Terminado (killed)      ./p1
+
+3. [OK]
+  El proceso le dice al S.O que le mande una señal de alarma cada 3 segundos.
+  Cuando recibe esa señal, el manejador de señales del proceso imprime por
+  pantalla "Activada".
+  
+4. [OK]
+  El proceso padre le dice al S.O qaue le mande una señal de alarma cada 5
+  segundos y se pone a esperar al proceso hijo.
+  Cuando recibe la señal, el manejador de señales del proceso padre
+  envía una señal SIGKILL al proceso hijo, por lo que éste termina.
+

@@ -1,0 +1,97 @@
+PRÁCTICA 1. PROCESOS
+
+TAREAS:
+
+1.	Descarga el fichero procesos.zip correspondiente a la primera práctica. 
+2.	Compila el programa p1_prueba1.c mediante la siguiente instrucción:
+
+                   gcc –Wall –W  p1_prueba1.c  -o p1
+
+3.	Ejecuta varias veces el programa generado.
+4.	¿Qué proceso es el padre del proceso p1?  Se puede ver con la orden ps
+
+
+
+
+5.	Compila y ejecuta p1_prueba2.c. Indica el identificador de usuario real y efectivo del proceso y también el identificador de grupo real y efectivo.
+
+
+
+
+6.	Compila y ejecuta p1_prueba3.c. Indica de las líneas de salida cuál corresponde al padre y cuál corresponde al hijo.
+
+
+
+
+7.	Observa que se ha puesto wait en el padre, esto es para que el proceso padre espere a que el hijo termine antes de terminar. 
+Indica el resultado de la ejecución si comentas el wait.
+
+
+
+
+
+8.	En p1_prueba3.c crea una variable local a main llamada a, iníciala a 0. Haz varias pruebas imprimiendo el valor de la variable a antes del fork, 
+en el hijo, en el padre y después del switch. Prueba también a modificar su valor en el hijo y en el padre. 
+
+
+
+
+
+9.	Recuerda como se utilizan los argumentos en la línea de órdenes en C compilando y ejecutando el programa argumentos.c proporcionado.
+
+
+
+
+10.	Compila y ejecuta p1_prueba4.c. Indica cuál es el resultado de la ejecución.
+
+
+
+
+
+11.	Quita el comentario en p1_prueba4.c de la instrucción getchar para que pida un carácter antes de terminar. Ejecuta ps –a para ver todos los procesos.
+
+
+
+
+ 
+12.	Cambia en p1_prueba4.c la instrucción execlp por esta otra y observa el resultado:
+execlp("ls","ls","-j",NULL);
+Comenta el resultado.
+
+
+
+
+
+13.	Cambia en p1_prueba4.c la instrucción execlp por esta otra y observa el resultado:
+execlp("ls","gg","-j",NULL);
+Comenta el resultado.
+
+
+
+
+14.	Compila y ejecuta p1_prueba5.c. Indica cuál es el resultado.
+
+
+
+
+15.	Compila  p1_prueba6.c y ejecútalo para que el resultado sea similar al resultado de p1_prueba5.c.
+
+
+
+
+16.	 Compila p1_prueba7.c y ejecútalo con los siguientes argumentos:
+p1_prueba1
+sin argumentos
+kk
+ls –j
+Para probar la terminación con una señal : ls –lR /     
+y a continuación: Crt-z / ps / kill -9 idProcesoHijo / jobs / fg idTrabajoPadre 
+
+
+
+
+
+
+
+
+
